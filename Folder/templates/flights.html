@@ -1,0 +1,197 @@
+{% extends 'base.html' %}
+{% include 'header.html' %}
+
+{% block title %} FLIGHTS {% endblock %}
+
+
+{% block body %}
+    <div class="container">
+        <div class="row">
+            <div class="col md-12">
+                <div class="jumbotron p-3">
+                    <h2> Manage <b>Flights</b>
+                        <button type="button" class="btn btn-success float-right"
+                                data-toggle="modal" data-target="#mymodal"> Add New Flights
+                        </button>
+                    </h2>
+
+                    {% with messages = get_flashed_messages() %}
+                        {% if messages %}
+                            {% for message in messages %}
+                                <div class="alert alert-success alert-dismisable" role="alert">
+                                    <button type="button" class="close" data-dismiss="alert" aria-label="close">
+                                        <span aria-hidden="true">x</span>
+                                    </button>
+                                    {{ message }}
+                                </div>
+                            {% endfor %}
+                        {% endif %}
+                    {% endwith %}
+
+                    <table class="table table-hover table-dark">
+                        <tr>
+                            <th>Id</th>
+                            <th>TakeOff Time</th>
+                            <th>Land Time</th>
+                            <th>Aircraft</th>
+                            <th>Pilot</th>
+                            <th>Heavy</th>
+                            <th>OGN Ht</th>
+                            <th>Billed Ht</th>
+                        </tr>
+
+                        {% for row in flights %}
+                            <tr>
+                                <td>{{ row.id }}</td>
+                                <td>{{ row.to_datetime }}</td>
+                                <td>{{ row.ld_datetime }}</td>
+                                <td>{{ row.registration }}</td>
+                                <td>{{ row.pilot }}</td>
+                                <td>{{ row.heavy }}</td>
+                                <td>{{ row.OGN_ht }}</td>
+                                <td>{{ row.launch_ht }}</td>
+                                <td>
+                                    <a href="/flight_update/{{ row.id }}" class="btn btn-warning btn-xs"
+                                       data-toggle="modal" data-target="#modaledit{{ row.id }}">Update</a>
+                                    <a href="/flight_delete/{{ row.id }}" class="btn btn-danger btn-xs"
+                                       onclick="return confirm('Are you sure?')"> Delete</a>
+                                </td>
+                            </tr>
+
+                            <div id=modaledit{{ row.id }} class="modal fade" role="dialog">
+                                <div class="modal-dialog">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h4 class="modal-title">Update Flight</h4>
+                                        </div>
+
+                                        <div class="modal-body">
+                                            <form action="{{ url_for('flight_update') }}" method="POST">
+
+                                                <div class="form-group">
+                                                    <label> Id:</label>
+                                                    <input type="hidden" name="id" value="{{ row.id }}">
+                                                    <input type="text" class="form-control" name="id">
+                                                </div>
+
+                                                <div class="form-group">
+                                                    <label> TO Date Time:</label>
+                                                    <input type="datetime-local" class="form-control" name="to_datetime"
+                                                           value="{{ row.to_datetime }}">
+                                                </div>
+
+                                                <div class="form-group">
+                                                    <label> LD Date Time:</label>
+                                                    <input type="datetime-local" class="form-control" name="ld_datetime"
+                                                           value="{{ row.ld_datetime }}">
+                                                </div>
+                                                <div class="form-group">
+                                                    <label> Registration:</label>
+                                                    <input type="text" class="form-control" name="registration"
+                                                           value="{{ row.registration }}">
+                                                </div>
+
+                                                <div class="form-group">
+                                                    <label> Pilot:</label>
+                                                    <input type="text" class="form-control" name="pilot"
+                                                           value="{{ row.pilot }}">
+                                                </div>
+
+                                                <div class="form-group">
+                                                    <label> Heavy:</label>
+                                                    <input type="text" class="form-control" name="heavy"
+                                                           value="{{ row.heavy }}">
+                                                </div>
+
+                                                <div class="form-group">
+                                                    <label> OGN Ht:</label>
+                                                    <input type="number" class="form-control" name="OGN_ht"
+                                                           value="{{ row.OGN_ht }}">
+                                                </div>
+
+                                                <div class="form-group">
+                                                    <label> Launch Ht:</label>
+                                                    <input type="number" class="form-control" name="launch_ht"
+                                                           value="{{ row.launch_ht }}">
+                                                </div>
+
+                                                <div class="form-group">
+                                                    <button class="btn-primary" type="submit">Update</button>
+                                                </div>
+
+                                            </form>
+
+                                        </div>
+
+                                        <div class="model-footer">
+                                            <button type="button" class="btn btn-secondary float-right"
+                                                    data-dismiss="modal">Close
+                                            </button>
+                                        </div>
+
+                                    </div>
+                                </div>
+                            </div>
+                        {% endfor %}
+                    </table>
+                </div>
+
+                <div id=mymodal class="modal fade" role="dialog">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h4 class="modal-title">Add Flight</h4>
+                            </div>
+                            <div class="modal-body">
+                                <form action="{{ url_for('flight_insert') }}" method="POST">
+                                    <div class="form-group">
+                                        <label> TO Day Time:</label>
+                                        <input type="datetime-local" class="form-control" name="to_datetime" required="1"/>
+                                    </div>
+                                    <div class="form-group">
+                                        <label> LD Day Time:</label>
+                                        <input type="datetime-local" class="form-control" name="ld_datetime" />
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label> Registration:</label>
+                                        <input type="text" class="form-control" name="registration" required="1">
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label> Pilot:</label>
+                                        <input type="text" class="form-control" name="pilot" required="1">
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label> Heavy</label>
+                                        <input type="text" class="form-control" name="heavy" required="1">
+                                    </div>
+                                    <div class="form-group">
+                                        <label> OGN Height:</label>
+                                        <input type="number" class="form-control" name="OGN_ht" >
+                                    </div>
+                                    <div class="form-group">
+                                        <label> Launch Height:</label>
+                                        <input type="number" class="form-control" name="launch_ht" required="1">
+                                    </div>
+
+
+                                    <div class="form-group">
+                                        <button class="btn-primary" type="submit">Add Flight</button>
+                                    </div>
+                                </form>
+                            </div>
+                            <div class="model-footer">
+                                <button type="button" class="btn btn-secondary float-right" data-dismiss="modal">Close
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+{% endblock %}

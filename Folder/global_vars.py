@@ -1,0 +1,12 @@
+active_date = None
+start_date = None
+end_date = None
+start = None
+acft = {}
+known_pilots = set()
+known_aircraft = set()
+tugs = ['PXI', 'KKZ', 'TNE']
+club = {'UIU': 0.9, 'GJH': 0.7}
+bulk_bill = ['GJ', 'GB', 'RP', 'JT', 'BM']
+self_launch = ['FFO', 'GXM', 'GDE']
+last_invoice = 999

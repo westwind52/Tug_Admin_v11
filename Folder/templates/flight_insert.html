@@ -1,0 +1,51 @@
+{% extends 'base.html' %}
+{% include 'header.html' %}
+
+{% import "bootstrap/wtf.html" as wtf %}
+
+{% block title %} FLIGHT INSERT {% endblock %}
+
+{% block body %}
+    <div class="container">
+        <div class="row">
+            <div class="col md-12">
+                <div class="jumbotron p-3">
+                    <button type="button" class="btn btn-primary">{{ form.to_date.data}}</button>
+                    <button type="button" class="btn btn-primary">SHEET</button>
+                    <button type="button" class="btn btn-outline-primary ">{{ form.sheet_number.data }}</button>
+
+                    {% with messages = get_flashed_messages() %}
+                        {% if messages %}
+                            {% for message in messages %}
+                                <div class="alert alert-success alert-dismisable" role="alert">
+                                    <button type="button" class="close" data-dismiss="alert" aria-label="close">
+                                        <span aria-hidden="true">x</span>
+                                    </button>
+                                    {{ message }}
+                                </div>
+                            {% endfor %}
+                        {% endif %}
+                    {% endwith %}
+
+                    <form  method="POST">
+                        {{ form.hidden_tag() }}
+                         <div class="col-md-10 col-lg-8 mx-lg-auto mx-md-auto">
+                          <h1 class="pt-5 pb-2">Add New Flight</h1>
+                                {{ wtf.form_field(form.flt_class) }}
+                                {{ wtf.form_field(form.aircraft) }}
+                                {{ wtf.form_field(form.pilot_initials) }}
+                                {{ wtf.form_field(form.heavy) }}
+                                {{ wtf.form_field(form.to_time) }}
+                                {{ wtf.form_field(form.ld_time) }}
+
+                              <p class="pt-5"><strong>{{ message }}</strong></p>
+                             <button class="btn-primary btn-xs" type="submit">Add Aircraft</button>
+                        </div>
+                    </form>
+
+            </div>
+        </div>
+    </div>
+
+
+{% endblock %}

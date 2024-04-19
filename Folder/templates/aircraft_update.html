@@ -1,0 +1,48 @@
+{% extends 'base.html' %}
+{% include 'header.html' %}
+
+{% import "bootstrap/wtf.html" as wtf %}
+
+{% block title %} AIRCRAFT UPDATE {% endblock %}
+
+{% block body %}
+    <div class="container">
+        <div class="row">
+            <div class="col md-12">
+                <div class="jumbotron p-3">
+
+                    {% with messages = get_flashed_messages() %}
+                        {% if messages %}
+                            {% for message in messages %}
+                                <div class="alert alert-success alert-dismisable" role="alert">
+                                    <button type="button" class="close" data-dismiss="alert" aria-label="close">
+                                        <span aria-hidden="true">x</span>
+                                    </button>
+                                    {{ message }}
+                                </div>
+                            {% endfor %}
+                        {% endif %}
+                    {% endwith %}
+
+                    <form  method="POST">
+                        {{ form.hidden_tag() }}
+                         <div class="col-md-10 col-lg-8 mx-lg-auto mx-md-auto">
+                          <h1 class="pt-5 pb-2">Update Page</h1>
+                              {{ wtf.form_field(form.registration) }}
+                              {{ wtf.form_field(form.make) }}
+                              {{ wtf.form_field(form.self_launch) }}
+                              {{ wtf.form_field(form.pilot_initials) }}
+                              {{ wtf.form_field(form.normal_pilot) }}
+                              {{ wtf.form_field(form.acft_class) }}
+                              {{ wtf.form_field(form.heavy) }}
+                              <p class="pt-5"><strong>{{ message }}</strong></p>
+                             <button class="btn-primary btn-xs" type="submit">Update</button>
+                        </div>
+                    </form>
+
+            </div>
+        </div>
+    </div>
+
+
+{% endblock %}

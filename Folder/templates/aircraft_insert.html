@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+
+{% import "bootstrap/wtf.html" as wtf %}
+
+{% block title %} AIRCRAFT INSERT {% endblock %}
+{% block body %}
+    <div class="container">
+        <div class="row">
+            <div class="col md-12">
+
+                    <form action=" " method="POST">
+
+                         <div class="col-md-10 col-lg-8 mx-lg-auto mx-md-auto">
+                              <h1 class="pt-5 pb-2">Insert Aircraft</h1>
+                              {{ wtf.quick_form(form) }}
+                              <button class="btn btn-warning btn-xs" type="submit">Insert</button>
+                              <p class="pt-5"><strong>{{ message }}</strong></p>
+                        </div>
+
+                    </form>
+
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+

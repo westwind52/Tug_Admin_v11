@@ -1,0 +1,59 @@
+{% extends 'base.html' %}
+{% include 'header.html' %}
+
+{% block title %} Upload {% endblock %}
+
+{% block body %}
+    <div class="container">
+        <div class="row">
+            <div class="col md-12">
+                <div class="jumbotron p-3">
+                    <h2> Upload>
+
+                        <button type="button" class="btn btn-info">{{ to_date }}</button>
+                        <a href="/webflights" class="btn btn-secondary btn-xs float-right"> Return Flights</a>
+
+                    </h2>
+                    <table class="table table-hover table-dark">
+                        <tr>
+                            seq_num,flt_class,pilot_initials,invoice,bill_date,due_date,item,quantity,price,description,billing
+                            <th>Id</th>
+                            <th>Class</th>
+                            <th>Pilot</th>
+                            <th>invoice</th>
+                            <th>bill_date</th>
+                            <th>due_date</th>
+                            <th>item</th>
+                            <th>quantity</th>
+                            <th>price</th>
+                            <th>description</th>
+                            <th>billing</th>
+                        </tr>
+
+                        {% for row in flt_data %}
+                            <tr>
+                                <td>{{ row.seq_num }}</td>
+                                <td>{{ row.flt_class }}</td>
+                                <td>{{ row.pilot_initials }}</td>
+                                <td>{{ row.invoice }}</td>
+                                <td>{{ row.bill_date }}</td>
+                                <td>{{ row.due_date }}</td>
+                                <td>{{ row.item }}</td>
+                                <td>{{ row.quantity }}</td>
+                                <td>{{ row.price }}</td>
+                                <td>{{ row.description }}</td>
+                                <td>{{ row.billing }}</td>
+                            </tr>
+                        {% endfor %}
+                    </table>
+                <form method="POST">
+                    <button class="btn btn-primary" type="submit" >Submit</button>
+                </form>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+{% endblock %}

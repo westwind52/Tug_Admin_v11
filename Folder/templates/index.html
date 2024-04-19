@@ -1,0 +1,52 @@
+{% extends 'base.html' %}
+{% include 'header.html' %}
+
+{% block title %} Home {% endblock %}
+{% block body %}
+
+      <div class="container border bg-dark text-white">
+      <form method="POST">
+          {% with messages = get_flashed_messages() %}
+            {% if messages %}
+                {% for message in messages %}
+                    <div class="alert alert-success alert-dismissible" role="alert">
+                        <button type="button" class="close" data-dismiss="alert" aria-label="close">
+                            <span aria-hidden="true">x</span>
+                        </button>
+                        {{ message }}
+                    </div>
+                {% endfor %}
+            {% endif %}
+          {% endwith %}
+
+            <div class="mx-auto" style="width: 200px;">
+                <h3><label class="form-control-label"> Start Date</label></h3>
+                <input type="date" class="form-control"  name="start_date" value = {{ start_date }}>
+
+                <br>
+            </div>
+
+            <div class="mx-auto" style="width: 200px;">
+                <h3><label class="form-control-label"> End Date</label></h3>
+                <input type="date" class="form-control"  name="end_date" value = {{ end_date }}>
+
+                <br> <br>
+
+            <form>
+                <label>Enter Sheet Id</label><br>
+                <input type="number" name="sheet_id"><br>
+            </form>
+
+            <br>  <br>
+            <div class="custom-control custom-checkbox">
+                <input type="checkbox" class="custom-control-input" name="ktrax" id="ktrax" >
+                <label class="custom-control-label" for="ktrax"> Import Ktrax</label>
+            </div>
+            <br>
+
+            <button class="btn btn-primary" type="submit" >Submit</button>
+        </div>
+        <br>
+      </form>
+      </div>
+{% endblock  %}

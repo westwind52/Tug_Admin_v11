@@ -1,0 +1,33 @@
+{% extends 'base.html' %}
+
+{% block title %} TGC Operations {% endblock %}
+
+
+{% block body %}
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+      <a class="navbar-brand" href="#">Navbar</a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+        <div class="navbar-nav">
+            <a class="nav-link active" href='/'>Home <span class="sr-only">(current)</span></a>
+            <a class="nav-link" href='/webflights'>Flights</a>
+            <a class="nav-link" href='/flight_sheet'>Sheets</a>
+            <a class="nav-link" href="/aircraft">Aircraft</a>
+            <a class="nav-link" href="/analyse">Analyse</a>
+            <a class="nav-link" href="/pilots" >Pilots</a>
+            <a class="nav-link" href="/upload" >Upload</a>
+        </div>
+      </div>
+    </nav>
+
+    <div class="jumbotron p-3">
+        <div class="well text-center ">
+
+            <h1> TGC Flight Operations</h1>
+
+        </div>
+    </div>
+
+{% endblock %}

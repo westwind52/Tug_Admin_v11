@@ -1,0 +1,67 @@
+{% extends 'base.html' %}
+{% include 'header.html' %}
+
+{% block title %} FlightSheet {% endblock %}
+
+{% block body %}
+    <div class="container">
+        <div class="row">
+            <div class="col md-12">
+                <div class="jumbotron p-3">
+                    <h2> Review Flight Record >
+                        <button type="button" class="btn btn-primary">{{ "Sheet "+sheet }}</button>
+                        <button type="button" class="btn btn-info">{{ to_date }}</button>
+                        <a href="/webflights" class="btn btn-secondary btn-xs float-right"> Return Flights</a>
+                        <a href="/save_flightsheet" class="btn btn-warning btn-xs
+                            float-right" method="POST">Store Flightsheets</a>
+
+                    </h2>
+                    <table class="table table-hover table-dark">
+                        <tr>
+                            <th>Tow</th>
+                            <th>Payer</th>
+                            <th>Tug</th>
+                            <th>Glider</th>
+                            <th>TkOff</th>
+                            <th>Tug Ld</th>
+                            <th>Glider</th>
+                            <th>Billed</th>
+                            <th>FltTime</th>
+                            <th>Heavy</th>
+                            <th>Tow Cost</th>
+                            <th>Glider</th>
+                            <th>Billed</th>
+                        </tr>
+
+                        {% for row in flt_data %}
+                            <tr>
+                                <td>{{ row.tow }}</td>
+                                <td>{{ row.payer }}</td>
+                                <td>{{ row.tug_id }}</td>
+                                <td>{{ row.glider_id }}</td>
+                                <td>{{ row.tug_to }}</td>
+                                <td>{{ row.tug_ld }}</td>
+                                <td>{{ row.gld_ld }}</td>
+                                <td>{{ row.billed_ht }}</td>
+                                <td>{{ row.flt_time }}</td>
+                                <td>{{ row.heavy }}</td>
+                                <td>{{ row.tow_cost }}</td>
+                                <td>{{ row.glider_cost }}</td>
+                                <td>{{ row.billed }}</td>
+                                <td>
+                                        <a href="/full_tow_verify/{{ row.id }}" class="btn btn-info btn-sm">Verify</a>
+                                </td>
+                            </tr>
+                        {% endfor %}
+                    </table>
+                <form method="POST">
+                    <button class="btn btn-primary" type="submit" >Submit</button>
+                </form>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+{% endblock %}
